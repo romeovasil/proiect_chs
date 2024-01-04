@@ -1,0 +1,51 @@
+import 'dart:typed_data';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:proiect_chs_r/model/recipe.dart';
+import 'package:proiect_chs_r/resources/storage_methods.dart';
+import 'package:uuid/uuid.dart';
+
+class FirestoreMethods {
+  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+
+  Future<String> addRecipe(
+      String instructions,
+      String name,
+      String uid,
+      Uint8List file,
+      String time,
+      String portions,
+      String difficulty,
+      String username) async {
+    String res = "error";
+    try {
+      print("merge?");
+      String photoUrl =
+          await StorageMethods().uploadImageToStorage("recipes", file, true);
+      print("nu?");
+      String recipeId = const Uuid().v1();
+      Recipe recipe = Recipe(
+        name: name,
+        time: time,
+        difficulty: difficulty,
+        instructions: instructions,
+        portions: portions,
+        uid: uid,
+        recipeId: recipeId,
+        recipeUrl: photoUrl,
+        username: username,
+        likes: [],
+      );
+
+      _firebaseFirestore
+          .collection("recipes")
+          .doc(recipeId)
+          .set(recipe.toJson());
+      res = "succes";
+    } catch (err) {
+      res = err.toString();
+    }
+    print("res");
+    return res;
+  }
+}
