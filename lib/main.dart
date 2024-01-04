@@ -2,12 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:proiect_chs_r/providers/user_provider.dart';
 import 'package:proiect_chs_r/responsive/mobile_screen_layout.dart';
 import 'package:proiect_chs_r/responsive/responsive_layout_screen.dart';
 import 'package:proiect_chs_r/responsive/web_screen_layout.dart';
 import 'package:proiect_chs_r/screens/login_screen.dart';
 import 'package:proiect_chs_r/screens/signup_screen.dart';
 import 'package:proiect_chs_r/utils/colors.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +35,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => UserProvider(),
+        ),
+      ],
+      child: MaterialApp(
         title: 'Recipe App',
         theme: ThemeData.dark()
             .copyWith(scaffoldBackgroundColor: mobileBackgroundColor),
@@ -63,6 +71,8 @@ class MyApp extends StatelessWidget {
 
             return const LoginScreen();
           },
-        ));
+        ),
+      ),
+    );
   }
 }
