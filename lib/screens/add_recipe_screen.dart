@@ -1,8 +1,12 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:proiect_chs_r/providers/user_provider.dart';
 import 'package:proiect_chs_r/resources/firestore_methods.dart';
+import 'package:proiect_chs_r/screens/home_screen.dart';
 import 'package:proiect_chs_r/utils/colors.dart';
 import 'package:proiect_chs_r/utils/utils.dart';
 import 'package:provider/provider.dart';
@@ -42,7 +46,12 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
           _isLoading = false;
         });
         showSnackBar("Posted", context);
+
         clearImage();
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+        );
       } else {
         setState(() {
           _isLoading = false;
@@ -118,153 +127,279 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
   @override
   Widget build(BuildContext context) {
     final UserProvider userProvider = Provider.of<UserProvider>(context);
-    return _file == null
-        ? Center(
-            child: IconButton(
-              icon: const Icon(Icons.upload),
-              onPressed: () => _selectImage(context),
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: mobileBackgroundColor,
+        title: const Text("New Recipe"),
+        centerTitle: false,
+        actions: [
+          TextButton(
+            onPressed: () => addRecipe(
+                userProvider.getUser!.uid, userProvider.getUser!.username),
+            child: Text(
+              'Add',
+              style: TextStyle(
+                  color: Colors.blueAccent,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16),
             ),
-          )
-        : Scaffold(
-            appBar: AppBar(
-              backgroundColor: mobileBackgroundColor,
-              leading: IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: clearImage,
-              ),
-              title: const Text("New Recipe"),
-              centerTitle: false,
-              actions: [
-                TextButton(
-                  onPressed: () => addRecipe(userProvider.getUser!.uid,
-                      userProvider.getUser!.username),
-                  child: Text(
-                    'Add',
-                    style: TextStyle(
-                        color: Colors.blueAccent,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16),
+          ),
+        ],
+      ),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: SvgPicture.asset(
+              'assets/wallpaper.svg',
+              fit: BoxFit.cover,
+            ),
+          ),
+          Column(children: [
+            _isLoading
+                ? const LinearProgressIndicator()
+                : Padding(
+                    padding: EdgeInsets.only(top: 0),
                   ),
-                ),
-              ],
-            ),
-            body: Column(children: [
-              _isLoading
-                  ? const LinearProgressIndicator()
-                  : Padding(
-                      padding: EdgeInsets.only(top: 0),
-                    ),
-              const Divider(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.45,
+            const Divider(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  margin: EdgeInsets.symmetric(horizontal: 12.0, vertical: 25),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
                     child: TextField(
                       controller: _nameController,
-                      decoration: const InputDecoration(
+                      style: TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
                         hintText: "Recipe name",
+                        hintStyle: TextStyle(color: Colors.grey),
                         border: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(vertical: 12.0),
                       ),
-                      maxLines: 8,
+                      maxLines: 1,
                     ),
                   ),
-                  const Divider(),
-                ],
-              ),
-              Row(
+                ),
+                const Divider(),
+              ],
+            ),
+            Center(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.45,
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    child: TextField(
-                      controller: _timeController,
-                      decoration: const InputDecoration(
-                        hintText: "Time",
-                        border: InputBorder.none,
-                      ),
-                      maxLines: 8,
-                    ),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.45,
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    child: TextField(
-                      controller: _difficultyController,
-                      decoration: const InputDecoration(
-                        hintText: "Difficulty",
-                        border: InputBorder.none,
-                      ),
-                      maxLines: 8,
-                    ),
-                  ),
-                  const Divider(),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.45,
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    child: TextField(
-                      controller: _portionsController,
-                      decoration: const InputDecoration(
-                        hintText: "No of portions",
-                        border: InputBorder.none,
-                      ),
-                      maxLines: 8,
-                    ),
-                  ),
-                  const Divider(),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.45,
-                    child: TextField(
-                      controller: _instructionsController,
-                      decoration: const InputDecoration(
-                        hintText: "Write instructions",
-                        border: InputBorder.none,
-                      ),
-                      maxLines: 8,
-                    ),
-                  ),
-                  const Divider(),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 45,
-                    width: 45,
-                    child: AspectRatio(
-                      aspectRatio: 487 / 451,
-                      child: Container(
+                  Row(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        margin: EdgeInsets.symmetric(
+                            horizontal: 13.0, vertical: 25),
                         decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: MemoryImage(_file!),
-                            fit: BoxFit.fill,
-                            alignment: FractionalOffset.topCenter,
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Row(
+                            children: [
+                              Icon(Icons.access_time,
+                                  color: const Color.fromARGB(255, 0, 0, 0)),
+                              SizedBox(width: 8.0),
+                              Expanded(
+                                child: TextField(
+                                  controller: _timeController,
+                                  style: TextStyle(color: Colors.black),
+                                  decoration: InputDecoration(
+                                    hintText: "Time",
+                                    hintStyle: TextStyle(color: Colors.grey),
+                                    border: InputBorder.none,
+                                    contentPadding:
+                                        EdgeInsets.symmetric(vertical: 12.0),
+                                  ),
+                                  maxLines: 1,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        margin: EdgeInsets.symmetric(
+                            horizontal: 12.0, vertical: 25),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Row(
+                            children: [
+                              Icon(Icons.assessment,
+                                  color: const Color.fromARGB(255, 0, 0, 0)),
+                              SizedBox(width: 8.0),
+                              Expanded(
+                                child: TextField(
+                                  controller: _difficultyController,
+                                  style: TextStyle(color: Colors.black),
+                                  decoration: InputDecoration(
+                                    hintText: "Difficulty",
+                                    hintStyle: TextStyle(color: Colors.grey),
+                                    border: InputBorder.none,
+                                    contentPadding:
+                                        EdgeInsets.symmetric(vertical: 12.0),
+                                  ),
+                                  maxLines: 1,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   const Divider(),
                 ],
-              )
-            ]),
-          );
+              ),
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.4,
+                  margin: EdgeInsets.symmetric(horizontal: 20.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      children: [
+                        Icon(Icons.person,
+                            color: const Color.fromARGB(255, 0, 0, 0)),
+                        SizedBox(width: 8.0),
+                        Expanded(
+                          child: TextField(
+                            controller: _portionsController,
+                            style: TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                              hintText: "Portions",
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: InputBorder.none,
+                              contentPadding:
+                                  EdgeInsets.symmetric(vertical: 12.0),
+                            ),
+                            maxLines: 1,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const Divider(),
+              ],
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.89,
+                  margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 25),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 0.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            controller: _instructionsController,
+                            style: TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                              hintText: " Write instructions",
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: InputBorder.none,
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: 13.0, horizontal: 7.0),
+                            ),
+                            maxLines: 8,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const Divider(),
+              ],
+            ),
+            _file == null
+                ? Center(
+                    child: Container(
+                      width: 300.0, // Adjust the width
+                      height: 150.0,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            color: Colors.grey,
+                            width: 1.0), // Border color and width
+                        borderRadius:
+                            BorderRadius.circular(8.0), // Border radius
+                      ),
+                      child: IconButton(
+                        icon: const Icon(Icons.upload),
+                        onPressed: () => _selectImage(context),
+                      ),
+                    ),
+                  )
+                : Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 46),
+                          width: 300.0, // Adjust the width
+                          height: 150.0,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: Colors.grey,
+                                width: 1.0), // Border color and width
+                            borderRadius:
+                                BorderRadius.circular(8.0), // Border radius
+                          ),
+                          child: AspectRatio(
+                            aspectRatio: 487 / 451,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: MemoryImage(_file!),
+                                  fit: BoxFit.fill,
+                                  alignment: FractionalOffset.topCenter,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const Divider(),
+                    ],
+                  )
+          ]),
+        ],
+      ),
+    );
   }
 }
