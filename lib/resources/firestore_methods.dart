@@ -48,4 +48,27 @@ class FirestoreMethods {
     print("res");
     return res;
   }
+
+  Future<void> likeRecipe(String recipeId, String uid, List likes) async {
+    print('$recipeId' '$uid' '$likes');
+    try {
+      if (likes.contains(uid)) {
+        await _firebaseFirestore.collection("recipes").doc('$recipeId').update({
+          'likes': FieldValue.arrayRemove(
+            [uid],
+          ),
+        });
+      } else {
+        await _firebaseFirestore.collection("recipes").doc('$recipeId').update({
+          'likes': FieldValue.arrayUnion(
+            [uid],
+          ),
+        });
+      }
+    } catch (err) {
+      print(
+        err.toString(),
+      );
+    }
+  }
 }

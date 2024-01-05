@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:proiect_chs_r/resources/firestore_methods.dart';
 import 'package:proiect_chs_r/screens/recipe_details_screen.dart';
 import 'package:proiect_chs_r/utils/colors.dart';
+import 'package:proiect_chs_r/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class RecipeCard extends StatelessWidget {
   final snap;
@@ -8,6 +11,7 @@ class RecipeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final UserProvider userProvider = Provider.of<UserProvider>(context);
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -167,11 +171,19 @@ class RecipeCard extends StatelessWidget {
             Row(
               children: [
                 IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.favorite,
-                    color: Colors.red,
-                  ),
+                  onPressed: () async {
+                    await FirestoreMethods().likeRecipe(snap['recipeId'],
+                        userProvider.getUser!.uid, snap['likes']);
+                  },
+                  icon: snap['likes'].contains(userProvider.getUser!.uid)
+                      ? const Icon(
+                          Icons.thumb_up,
+                          color: Colors.red,
+                        )
+                      : const Icon(
+                          Icons.thumb_up,
+                          color: Color.fromARGB(255, 122, 119, 119),
+                        ),
                 ),
                 IconButton(
                   onPressed: () {},
