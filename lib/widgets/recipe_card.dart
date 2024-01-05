@@ -8,7 +8,7 @@ class RecipeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromARGB(255, 80, 79, 74),
+      margin: const EdgeInsets.only(bottom: 15.0),
       padding: const EdgeInsets.symmetric(
         vertical: 10,
       ),
@@ -72,27 +72,82 @@ class RecipeCard extends StatelessWidget {
             ),
           ),
           Container(
-            color: Colors.amber[800],
+            color: Color.fromARGB(255, 253, 171, 64),
             child: Row(
               children: [
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.25,
                   width: MediaQuery.of(context).size.width * 0.55,
                   child: Image.network(
-                    "https://images.unsplash.com/photo-1682687220015-186f63b8850a?q=80&w=1550&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                    fit: BoxFit.fill,
+                    snap['recipeUrl'],
+                    fit: BoxFit.cover,
                   ),
                 ),
-                const Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      "Your text goes here",
-                      style: TextStyle(
-                        color: Colors.white,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        snap['name'],
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'YourCustomFont',
+                        ),
                       ),
                     ),
-                  ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment
+                            .start, // Align items to the start of the row
+                        children: [
+                          Icon(Icons.access_time, color: Colors.white),
+                          SizedBox(width: 8.0),
+                          Text(
+                            snap['time'],
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(Icons.person, color: Colors.white),
+                          SizedBox(width: 8.0),
+                          Text(
+                            snap['portions'],
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(Icons.assessment, color: Colors.white),
+                          SizedBox(width: 8.0),
+                          Text(
+                            snap['difficulty'],
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -125,7 +180,7 @@ class RecipeCard extends StatelessWidget {
                       .titleSmall!
                       .copyWith(fontWeight: FontWeight.w800),
                   child: Text(
-                    '1200 likes',
+                    '${snap['likes'].length} likes',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),

@@ -5,7 +5,7 @@ import 'package:proiect_chs_r/screens/home_screen.dart';
 const webscreenSize = 600;
 
 const homeScreenItems = [
-  homeScreen(),
+  HomeScreen(),
   AddRecipeScreen(),
   Text("cart"),
   Text("profile"),
