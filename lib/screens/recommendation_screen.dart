@@ -85,6 +85,12 @@ class _SearchFieldSampleState extends State<SearchFieldSample> {
     });
   }
 
+  final suggestionDecoration = SuggestionDecoration(
+    color: Colors.blueAccent,
+    border: Border.all(color: Colors.orange),
+    borderRadius: BorderRadius.circular(20),
+  );
+
   var suggestions = <String>[];
   @override
   Widget build(BuildContext context) {
@@ -114,13 +120,13 @@ class _SearchFieldSampleState extends State<SearchFieldSample> {
                             .toList(),
                         suggestionState: Suggestion.hidden,
                         controller: _searchController,
-                        hint: 'Search by country name',
+                        hint: 'Search by recipe',
                         maxSuggestionsInViewPort: 4,
                         itemHeight: 45,
                         textCapitalization: TextCapitalization.words,
                         validator: (x) {
                           if (x!.isEmpty || !containsRecipe(x)) {
-                            return 'Please Enter a valid Country';
+                            return 'Please enter a valid recipe';
                           }
                           return null;
                         },
@@ -133,6 +139,31 @@ class _SearchFieldSampleState extends State<SearchFieldSample> {
                           getRecipeRecommendationStream();
                           focus.unfocus();
                         },
+                        scrollbarDecoration: ScrollbarDecoration(),
+                        searchInputDecoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(24),
+                            borderSide: const BorderSide(
+                              width: 1,
+                              color: Colors.orange,
+                              style: BorderStyle.solid,
+                            ),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(24),
+                            borderSide: const BorderSide(
+                              width: 1,
+                              color: Colors.black,
+                              style: BorderStyle.solid,
+                            ),
+                          ),
+                          fillColor: Colors.white,
+                          filled: true,
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                          ),
+                        ),
+                        suggestionsDecoration: suggestionDecoration,
                       ),
                     ),
                   ),
