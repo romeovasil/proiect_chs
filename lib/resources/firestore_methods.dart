@@ -16,7 +16,8 @@ class FirestoreMethods {
       String time,
       String portions,
       String difficulty,
-      String username) async {
+      String username,
+      ingredients) async {
     String res = "error";
     try {
       print("merge?");
@@ -25,17 +26,17 @@ class FirestoreMethods {
       print("nu?");
       String recipeId = const Uuid().v1();
       Recipe recipe = Recipe(
-        name: name,
-        time: time,
-        difficulty: difficulty,
-        instructions: instructions,
-        portions: portions,
-        uid: uid,
-        recipeId: recipeId,
-        recipeUrl: photoUrl,
-        username: username,
-        likes: [],
-      );
+          name: name,
+          time: time,
+          difficulty: difficulty,
+          instructions: instructions,
+          portions: portions,
+          uid: uid,
+          recipeId: recipeId,
+          recipeUrl: photoUrl,
+          username: username,
+          likes: [],
+          ingredients: ingredients);
 
       _firebaseFirestore
           .collection("recipes")

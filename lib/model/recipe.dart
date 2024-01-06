@@ -11,6 +11,7 @@ class Recipe {
   final String recipeUrl;
   final String recipeId;
   final likes;
+  final ingredients;
 
   const Recipe(
       {required this.name,
@@ -22,7 +23,8 @@ class Recipe {
       required this.username,
       required this.recipeUrl,
       required this.recipeId,
-      required this.likes});
+      required this.likes,
+      required this.ingredients});
 
   static Recipe fromSnap(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
@@ -38,6 +40,7 @@ class Recipe {
       recipeUrl: snapshot["recipeUrl"],
       recipeId: snapshot["recipeId"],
       likes: snapshot["likes"],
+      ingredients: snapshot["ingredients"],
     );
   }
 
@@ -52,5 +55,6 @@ class Recipe {
         "recipeUrl": recipeUrl,
         "recipeId": recipeId,
         "likes": likes,
+        "ingredients": ingredients,
       };
 }
