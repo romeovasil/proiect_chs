@@ -72,4 +72,43 @@ class FirestoreMethods {
       );
     }
   }
+
+  Future<void> addIngredient(String uid, String ingredient) async {
+    DocumentReference userShoppingList =
+        _firebaseFirestore.collection("shoppingLists").doc(uid);
+
+    var snapshot = await userShoppingList.get();
+    var currentIngredients =
+        snapshot.exists ? List<String>.from(snapshot['ingredients']) : [];
+
+    currentIngredients.add(ingredient);
+
+    await userShoppingList.set({'ingredients': currentIngredients});
+  }
+
+  Future<void> deleteIngredient(String uid, String ingredient) async {
+    DocumentReference userShoppingList =
+        _firebaseFirestore.collection("shoppingLists").doc(uid);
+
+    var snapshot = await userShoppingList.get();
+    var currentIngredients =
+        snapshot.exists ? List<String>.from(snapshot['ingredients']) : [];
+
+    currentIngredients.remove(ingredient);
+
+    await userShoppingList.set({'ingredients': currentIngredients});
+  }
+
+  Future<void> clearShoppingList(String uid) async {
+    DocumentReference userShoppingList =
+        _firebaseFirestore.collection("shoppingLists").doc(uid);
+
+    var snapshot = await userShoppingList.get();
+    var currentIngredients =
+        snapshot.exists ? List<String>.from(snapshot['ingredients']) : [];
+
+    currentIngredients.clear();
+
+    await userShoppingList.set({'ingredients': currentIngredients});
+  }
 }
