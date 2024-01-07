@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             Positioned.fill(
               child: SvgPicture.asset(
-                'assets/wallpaper.svg',
+                'assets/ic_instagram.svg',
                 fit: BoxFit.cover,
               ),
             ),

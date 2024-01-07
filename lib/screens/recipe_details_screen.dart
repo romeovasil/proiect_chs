@@ -41,8 +41,8 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
         child: Stack(
           children: [
             Positioned.fill(
-              child: SvgPicture.asset(
-                'assets/wallpaper.svg',
+              child: Image.asset(
+                'assets/wallpaper.jpg',
                 fit: BoxFit.cover,
               ),
             ),
