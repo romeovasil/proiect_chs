@@ -16,7 +16,7 @@ class RecipeDetailsScreen extends StatefulWidget {
 
 class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
   late UserProvider userProvider;
-
+  Color _iconColor = const Color.fromARGB(255, 244, 155, 54);
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -125,12 +125,26 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
                                 style: const TextStyle(fontSize: 16.0),
                               ),
                               IconButton(
-                                icon: const Icon(Icons.add),
                                 onPressed: () async {
                                   await FirestoreMethods().addIngredient(
-                                      userProvider.getUser!.uid,
-                                      widget.snap['ingredients'][index]);
+                                    userProvider.getUser!.uid,
+                                    widget.snap['ingredients'][index],
+                                  );
                                 },
+                                icon: Container(
+                                  width: 30.0,
+                                  height: 30.0,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: _iconColor,
+                                  ),
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.add,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ],
                           ),
