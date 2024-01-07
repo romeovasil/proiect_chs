@@ -7,7 +7,6 @@ import 'package:proiect_chs_r/responsive/mobile_screen_layout.dart';
 import 'package:proiect_chs_r/responsive/responsive_layout_screen.dart';
 import 'package:proiect_chs_r/responsive/web_screen_layout.dart';
 import 'package:proiect_chs_r/screens/login_screen.dart';
-import 'package:proiect_chs_r/screens/signup_screen.dart';
 import 'package:proiect_chs_r/utils/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -32,7 +31,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

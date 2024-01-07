@@ -31,7 +31,7 @@ class RecipeCard extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 vertical: 4,
                 horizontal: 16,
               ).copyWith(right: 0),
@@ -48,7 +48,7 @@ class RecipeCard extends StatelessWidget {
                         children: [
                           Text(
                             snap['username'],
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                           )
@@ -88,7 +88,7 @@ class RecipeCard extends StatelessWidget {
               ),
             ),
             Container(
-              color: Color.fromARGB(255, 253, 171, 64),
+              color: const Color.fromARGB(255, 253, 171, 64),
               child: Row(
                 children: [
                   SizedBox(
@@ -103,10 +103,10 @@ class RecipeCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Text(
                           snap['name'],
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,
@@ -115,16 +115,15 @@ class RecipeCard extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment
-                              .start, // Align items to the start of the row
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Icon(Icons.access_time, color: Colors.white),
-                            SizedBox(width: 8.0),
+                            const Icon(Icons.access_time, color: Colors.white),
+                            const SizedBox(width: 8.0),
                             Text(
                               snap['time'],
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                               ),
                             ),
@@ -132,15 +131,15 @@ class RecipeCard extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Icon(Icons.person, color: Colors.white),
-                            SizedBox(width: 8.0),
+                            const Icon(Icons.person, color: Colors.white),
+                            const SizedBox(width: 8.0),
                             Text(
                               snap['portions'],
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                               ),
                             ),
@@ -148,15 +147,15 @@ class RecipeCard extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Icon(Icons.assessment, color: Colors.white),
-                            SizedBox(width: 8.0),
+                            const Icon(Icons.assessment, color: Colors.white),
+                            const SizedBox(width: 8.0),
                             Text(
                               snap['difficulty'],
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                               ),
                             ),
@@ -218,7 +217,7 @@ class RecipeCard extends StatelessWidget {
                     onTap: () {},
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 4),
-                      child: Text(
+                      child: const Text(
                         "View all 200 comments, ",
                         style: TextStyle(
                           fontSize: 16,

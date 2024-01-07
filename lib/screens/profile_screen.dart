@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:proiect_chs_r/resources/auth_methods.dart';
-import 'package:proiect_chs_r/resources/firestore_methods.dart';
 import 'package:proiect_chs_r/responsive/mobile_screen_layout.dart';
 import 'package:proiect_chs_r/responsive/responsive_layout_screen.dart';
 import 'package:proiect_chs_r/responsive/web_screen_layout.dart';

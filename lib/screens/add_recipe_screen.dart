@@ -53,7 +53,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
         clearImage();
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
         );
       } else {
         setState(() {
@@ -155,7 +155,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
           TextButton(
             onPressed: () => addRecipe(
                 userProvider.getUser!.uid, userProvider.getUser!.username),
-            child: Text(
+            child: const Text(
               'Add',
               style: TextStyle(
                   color: Colors.blueAccent,
@@ -177,7 +177,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
             Column(children: [
               _isLoading
                   ? const LinearProgressIndicator()
-                  : Padding(
+                  : const Padding(
                       padding: EdgeInsets.only(top: 0),
                     ),
               const Divider(),
@@ -187,18 +187,18 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width * 0.9,
-                    margin:
-                        EdgeInsets.symmetric(horizontal: 12.0, vertical: 25),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 12.0, vertical: 25),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: TextField(
                         controller: _nameController,
-                        style: TextStyle(color: Colors.black),
-                        decoration: InputDecoration(
+                        style: const TextStyle(color: Colors.black),
+                        decoration: const InputDecoration(
                           hintText: "Recipe name",
                           hintStyle: TextStyle(color: Colors.grey),
                           border: InputBorder.none,
@@ -220,24 +220,25 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                       children: [
                         Container(
                           width: MediaQuery.of(context).size.width * 0.4,
-                          margin: EdgeInsets.symmetric(
+                          margin: const EdgeInsets.symmetric(
                               horizontal: 13.0, vertical: 25),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
                             child: Row(
                               children: [
-                                Icon(Icons.access_time,
-                                    color: const Color.fromARGB(255, 0, 0, 0)),
-                                SizedBox(width: 8.0),
+                                const Icon(Icons.access_time,
+                                    color: Color.fromARGB(255, 0, 0, 0)),
+                                const SizedBox(width: 8.0),
                                 Expanded(
                                   child: TextField(
                                     controller: _timeController,
-                                    style: TextStyle(color: Colors.black),
-                                    decoration: InputDecoration(
+                                    style: const TextStyle(color: Colors.black),
+                                    decoration: const InputDecoration(
                                       hintText: "Time",
                                       hintStyle: TextStyle(color: Colors.grey),
                                       border: InputBorder.none,
@@ -257,24 +258,25 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                       children: [
                         Container(
                           width: MediaQuery.of(context).size.width * 0.4,
-                          margin: EdgeInsets.symmetric(
+                          margin: const EdgeInsets.symmetric(
                               horizontal: 12.0, vertical: 25),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
                             child: Row(
                               children: [
-                                Icon(Icons.assessment,
-                                    color: const Color.fromARGB(255, 0, 0, 0)),
-                                SizedBox(width: 8.0),
+                                const Icon(Icons.assessment,
+                                    color: Color.fromARGB(255, 0, 0, 0)),
+                                const SizedBox(width: 8.0),
                                 Expanded(
                                   child: TextField(
                                     controller: _difficultyController,
-                                    style: TextStyle(color: Colors.black),
-                                    decoration: InputDecoration(
+                                    style: const TextStyle(color: Colors.black),
+                                    decoration: const InputDecoration(
                                       hintText: "Difficulty",
                                       hintStyle: TextStyle(color: Colors.grey),
                                       border: InputBorder.none,
@@ -299,23 +301,23 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width * 0.4,
-                    margin: EdgeInsets.symmetric(horizontal: 20.0),
+                    margin: const EdgeInsets.symmetric(horizontal: 20.0),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Row(
                         children: [
-                          Icon(Icons.person,
-                              color: const Color.fromARGB(255, 0, 0, 0)),
-                          SizedBox(width: 8.0),
+                          const Icon(Icons.person,
+                              color: Color.fromARGB(255, 0, 0, 0)),
+                          const SizedBox(width: 8.0),
                           Expanded(
                             child: TextField(
                               controller: _portionsController,
-                              style: TextStyle(color: Colors.black),
-                              decoration: InputDecoration(
+                              style: const TextStyle(color: Colors.black),
+                              decoration: const InputDecoration(
                                 hintText: "Portions",
                                 hintStyle: TextStyle(color: Colors.grey),
                                 border: InputBorder.none,
@@ -337,24 +339,24 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                   Expanded(
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.4,
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 20),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Row(
                           children: [
-                            Icon(Icons.food_bank,
-                                color: const Color.fromARGB(255, 0, 0, 0)),
-                            SizedBox(width: 8.0),
+                            const Icon(Icons.food_bank,
+                                color: Color.fromARGB(255, 0, 0, 0)),
+                            const SizedBox(width: 8.0),
                             Expanded(
                               child: TextField(
                                 controller: _ingredientController,
-                                style: TextStyle(color: Colors.black),
-                                decoration: InputDecoration(
+                                style: const TextStyle(color: Colors.black),
+                                decoration: const InputDecoration(
                                   hintText: "Add Ingredient",
                                   hintStyle: TextStyle(color: Colors.grey),
                                   border: InputBorder.none,
@@ -370,7 +372,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.add),
+                    icon: const Icon(Icons.add),
                     onPressed: () {
                       addIngredient(_ingredientController.text);
                       _ingredientController.clear();
@@ -384,8 +386,9 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: ingredientsList.map((ingredient) {
                     return Container(
-                      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
-                      padding: EdgeInsets.all(8.0),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 5),
+                      padding: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 119, 107, 5),
                         borderRadius: BorderRadius.circular(8.0),
@@ -395,10 +398,10 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                         children: [
                           Text(
                             ingredient,
-                            style: TextStyle(color: Colors.black),
+                            style: const TextStyle(color: Colors.black),
                           ),
                           IconButton(
-                            icon: Icon(Icons.delete),
+                            icon: const Icon(Icons.delete),
                             onPressed: () {
                               removeIngredient(ingredient);
                             },
@@ -414,21 +417,21 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width * 0.89,
-                    margin:
-                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 25),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 25),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 0.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 0.0),
                       child: Row(
                         children: [
                           Expanded(
                             child: TextField(
                               controller: _instructionsController,
-                              style: TextStyle(color: Colors.black),
-                              decoration: InputDecoration(
+                              style: const TextStyle(color: Colors.black),
+                              decoration: const InputDecoration(
                                 hintText: " Write instructions",
                                 hintStyle: TextStyle(color: Colors.grey),
                                 border: InputBorder.none,
@@ -465,7 +468,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                       children: [
                         Center(
                           child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 46),
+                            margin: const EdgeInsets.symmetric(horizontal: 46),
                             width: 300.0,
                             height: 150.0,
                             decoration: BoxDecoration(

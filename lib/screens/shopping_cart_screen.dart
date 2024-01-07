@@ -31,11 +31,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
               List<String>.from(shoppingListsDoc.data()!['ingredients']);
         });
       }
-
-      print(shoppingList);
-    } catch (error) {
-      print('Error retrieving shopping list: $error');
-    }
+    } catch (error) {}
 
     return [];
   }
@@ -63,9 +59,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
       });
 
       getShoppingList();
-    } catch (error) {
-      print('Error deleting ingredient: $error');
-    }
+    } catch (error) {}
   }
 
   Future<void> clearShoppingList() async {
@@ -99,13 +93,13 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                   return Container(
                     margin: const EdgeInsets.symmetric(vertical: 8.0),
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 174, 126, 5),
+                      color: const Color.fromARGB(255, 174, 126, 5),
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     child: ListTile(
                       title: Text(shoppingList[index]),
                       trailing: IconButton(
-                        icon: Icon(Icons.delete),
+                        icon: const Icon(Icons.delete),
                         onPressed: () {
                           deleteIngredient(shoppingList[index]);
                         },
@@ -124,7 +118,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
               onPressed: () async {
                 await clearShoppingList();
               },
-              child: Text("Clear List"),
+              child: const Text("Clear List"),
             ),
           ),
         ],

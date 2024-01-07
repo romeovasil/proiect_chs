@@ -71,7 +71,7 @@ class _SignupScreenState extends State<SignupScreen> {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Flexible(child: Container(), flex: 2),
+                  Flexible(flex: 2, child: Container()),
                   const Text(
                     'Sign up',
                     style: TextStyle(
@@ -85,7 +85,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     height: 64,
                   ),
                   //circularWidget
-                  Stack(),
+                  const Stack(),
                   TextFieldInput(
                     hintText: 'Enter your email',
                     textInputType: TextInputType.emailAddress,
@@ -137,7 +137,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   const SizedBox(
                     height: 12,
                   ),
-                  Flexible(child: Container(), flex: 2),
+                  Flexible(flex: 2, child: Container()),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -165,7 +165,6 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ],
                   )
-                  //text field input for email
                 ]),
           ),
         ],

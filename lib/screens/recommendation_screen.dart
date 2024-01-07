@@ -98,7 +98,7 @@ class _SearchFieldSampleState extends State<SearchFieldSample> {
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
             appBar: AppBar(
-              title: Text('RecipeRecommendations'),
+              title: const Text('RecipeRecommendations'),
             ),
             body: Stack(children: [
               Positioned.fill(
@@ -174,7 +174,8 @@ class _SearchFieldSampleState extends State<SearchFieldSample> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 24),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 24),
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
                                     color: Colors
@@ -182,12 +183,12 @@ class _SearchFieldSampleState extends State<SearchFieldSample> {
                                     borderRadius: BorderRadius.circular(
                                         8), // Set border radius for rounded corners
                                   ),
-                                  child: Text(
+                                  child: const Text(
                                     'Select Recipe',
                                     style: TextStyle(fontSize: 40),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 ),
                               ],
@@ -198,7 +199,7 @@ class _SearchFieldSampleState extends State<SearchFieldSample> {
                             ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 100,
                   )
                 ],
@@ -213,8 +214,7 @@ class Recommendations extends StatefulWidget {
 
   Recommendations(
       {Key? key, required this.selectedRecipe, List<String>? suggestions})
-      : suggestions =
-            suggestions ?? [], // Initialize suggestions or use an empty list
+      : suggestions = suggestions ?? [],
         super(key: key);
 
   _RecommendationsState createState() => _RecommendationsState();
@@ -223,28 +223,25 @@ class Recommendations extends StatefulWidget {
 class _RecommendationsState extends State<Recommendations> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
   Widget dataWidget(String key, List<String> values) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Colors
-            .blueAccent, // Set the background color of the outer container
-        borderRadius:
-            BorderRadius.circular(10), // Set border radius for rounded corners
+        color: Colors.blueAccent,
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             '$key:',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
           ListView.builder(
@@ -252,22 +249,19 @@ class _RecommendationsState extends State<Recommendations> {
             itemCount: values.length,
             itemBuilder: (BuildContext context, int index) {
               return Container(
-                margin: EdgeInsets.symmetric(vertical: 4),
-                padding: EdgeInsets.all(8),
+                margin: const EdgeInsets.symmetric(vertical: 4),
+                padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors
-                      .orange, // Set the background color of the inner container
-                  borderRadius: BorderRadius.circular(
-                      8), // Set border radius for rounded corners
+                  color: Colors.orange,
+                  borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.food_bank,
-                        color: Colors.white), // Use food-related icon
-                    SizedBox(width: 8),
+                    const Icon(Icons.food_bank, color: Colors.white),
+                    const SizedBox(width: 8),
                     Text(
                       '${values[index]}',
-                      style: TextStyle(fontSize: 24, color: Colors.white),
+                      style: const TextStyle(fontSize: 24, color: Colors.white),
                     ),
                   ],
                 ),
@@ -285,20 +279,18 @@ class _RecommendationsState extends State<Recommendations> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color:
-                Colors.blue, // Set the background color of the outer container
-            borderRadius: BorderRadius.circular(
-                8), // Set border radius for rounded corners
+            color: Colors.blue,
+            borderRadius: BorderRadius.circular(8),
           ),
           child: Text(
             widget.selectedRecipe,
-            style: TextStyle(fontSize: 40),
+            style: const TextStyle(fontSize: 40),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         dataWidget('Recommendations', widget.suggestions)
