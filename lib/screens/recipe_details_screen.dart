@@ -37,120 +37,123 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
           ),
         ),
       ),
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: SvgPicture.asset(
-              'assets/wallpaper.svg',
-              fit: BoxFit.cover,
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: SvgPicture.asset(
+                'assets/wallpaper.svg',
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 10.0,
-                  ),
-                  child: Row(
-                    children: [
-                      Row(
-                        children: [
-                          const Icon(Icons.person, size: 20.0),
-                          const SizedBox(width: 4.0),
-                          Text(
-                            'Portions: ${widget.snap['portions']}',
-                            style: const TextStyle(fontSize: 16.0),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(width: 16.0),
-                      Row(
-                        children: [
-                          const Icon(Icons.assessment, size: 20.0),
-                          const SizedBox(width: 4.0),
-                          Text(
-                            'Difficulty: ${widget.snap['difficulty']}',
-                            style: const TextStyle(fontSize: 16.0),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(width: 16.0),
-                      Row(
-                        children: [
-                          const Icon(Icons.access_time, size: 20.0),
-                          const SizedBox(width: 4.0),
-                          Text(
-                            'Time: ${widget.snap['time']}',
-                            style: const TextStyle(fontSize: 16.0),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 12.0),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12.0),
-                  child: Image.network(
-                    widget.snap['recipeUrl'],
-                    height: 200,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                const SizedBox(height: 8),
-                const SizedBox(height: 8),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Ingredients:',
-                      style: TextStyle(
-                          fontSize: 20.0, fontWeight: FontWeight.bold),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 10.0,
                     ),
-                    const SizedBox(height: 3),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: List.generate(
-                        widget.snap['ingredients'].length,
-                        (index) => Row(
+                    child: Row(
+                      children: [
+                        Row(
                           children: [
+                            const Icon(Icons.person, size: 20.0),
+                            const SizedBox(width: 4.0),
                             Text(
-                              widget.snap['ingredients'][index],
+                              'Portions: ${widget.snap['portions']}',
                               style: const TextStyle(fontSize: 16.0),
-                            ),
-                            IconButton(
-                              icon: const Icon(Icons.add),
-                              onPressed: () async {
-                                await FirestoreMethods().addIngredient(
-                                    userProvider.getUser!.uid,
-                                    widget.snap['ingredients'][index]);
-                              },
                             ),
                           ],
                         ),
-                      ),
+                        const SizedBox(width: 16.0),
+                        Row(
+                          children: [
+                            const Icon(Icons.assessment, size: 20.0),
+                            const SizedBox(width: 4.0),
+                            Text(
+                              'Difficulty: ${widget.snap['difficulty']}',
+                              style: const TextStyle(fontSize: 16.0),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(width: 16.0),
+                        Row(
+                          children: [
+                            const Icon(Icons.access_time, size: 20.0),
+                            const SizedBox(width: 4.0),
+                            Text(
+                              'Time: ${widget.snap['time']}',
+                              style: const TextStyle(fontSize: 16.0),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  'Instructions:',
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  '${widget.snap['instructions']}',
-                  style: const TextStyle(fontSize: 16.0),
-                ),
-              ],
+                  ),
+                  const SizedBox(height: 12.0),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(12.0),
+                    child: Image.network(
+                      widget.snap['recipeUrl'],
+                      height: 200,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  const SizedBox(height: 8),
+                  const SizedBox(height: 8),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Ingredients:',
+                        style: TextStyle(
+                            fontSize: 20.0, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 3),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: List.generate(
+                          widget.snap['ingredients'].length,
+                          (index) => Row(
+                            children: [
+                              Text(
+                                widget.snap['ingredients'][index],
+                                style: const TextStyle(fontSize: 16.0),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.add),
+                                onPressed: () async {
+                                  await FirestoreMethods().addIngredient(
+                                      userProvider.getUser!.uid,
+                                      widget.snap['ingredients'][index]);
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Instructions:',
+                    style:
+                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '${widget.snap['instructions']}',
+                    style: const TextStyle(fontSize: 16.0),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

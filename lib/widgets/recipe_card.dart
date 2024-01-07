@@ -213,19 +213,6 @@ class RecipeCard extends StatelessWidget {
                       top: 0,
                     ),
                   ),
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 4),
-                      child: const Text(
-                        "View all 200 comments, ",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: secondaryColor,
-                        ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
             )

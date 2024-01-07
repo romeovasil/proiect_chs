@@ -157,11 +157,12 @@ class _SearchFieldSampleState extends State<SearchFieldSample> {
                               style: BorderStyle.solid,
                             ),
                           ),
-                          fillColor: Colors.white,
+                          fillColor: const Color.fromARGB(255, 120, 119, 119),
                           filled: true,
                           contentPadding: const EdgeInsets.symmetric(
                             horizontal: 20,
                           ),
+                          hintStyle: TextStyle(color: Colors.black),
                         ),
                         suggestionsDecoration: suggestionDecoration,
                       ),
