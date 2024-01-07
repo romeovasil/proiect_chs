@@ -6,7 +6,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:proiect_chs_r/providers/user_provider.dart';
 import 'package:proiect_chs_r/resources/firestore_methods.dart';
+import 'package:proiect_chs_r/responsive/mobile_screen_layout.dart';
+import 'package:proiect_chs_r/responsive/responsive_layout_screen.dart';
+import 'package:proiect_chs_r/responsive/web_screen_layout.dart';
 import 'package:proiect_chs_r/screens/home_screen.dart';
+import 'package:proiect_chs_r/screens/login_screen.dart';
 import 'package:proiect_chs_r/utils/colors.dart';
 import 'package:proiect_chs_r/utils/utils.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +34,17 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
   List<String> ingredientsList = [];
   bool _isLoading = false;
   void addRecipe(String uid, String username) async {
+    if (_nameController.text.isEmpty ||
+        _instructionsController.text.isEmpty ||
+        _timeController.text.isEmpty ||
+        _portionsController.text.isEmpty ||
+        _difficultyController.text.isEmpty ||
+        ingredientsList.isEmpty ||
+        _file == null) {
+      showSnackBar("Please fill in all fields", context);
+      return;
+    }
+
     setState(() {
       _isLoading = true;
     });
@@ -51,10 +66,11 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
         showSnackBar("Posted", context);
 
         clearImage();
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
-        );
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) => const ResponsiveLayout(
+                  mobileScreenLayout: MobileScreenLayout(),
+                  webScreenLayout: WebScreenLayout(),
+                )));
       } else {
         setState(() {
           _isLoading = false;
