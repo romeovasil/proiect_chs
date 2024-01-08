@@ -28,6 +28,8 @@ class _SearchFieldSampleState extends State<SearchFieldSample> {
 
   final _formKey = GlobalKey<FormState>();
 
+  Map<String, List<String>> recipesMap = {};
+
   bool containsRecipe(String text) {
     final String? result = suggestions.firstWhere(
         (String x) => x.toLowerCase() == text.toLowerCase(),
@@ -42,6 +44,7 @@ class _SearchFieldSampleState extends State<SearchFieldSample> {
   @override
   void initState() {
     getRecipeStream();
+    getRecipeRecommendationStream();
     super.initState();
   }
 
@@ -69,19 +72,14 @@ class _SearchFieldSampleState extends State<SearchFieldSample> {
         .collection('recipeRecommendations')
         .get();
 
-    Set<String> uniqueNames = Set<String>();
-
     data.docs.forEach((doc) {
-      if (doc.get('name') == _selected_recipe) {
-        var name = doc.get('name2')
-            as String; // Replace 'name' with the actual field name
-        uniqueNames.add(name);
-      }
-    });
-
-    setState(() {
-      recipeRecommendations = uniqueNames.toList();
-      print(recipeRecommendations);
+      var name = doc.get('name') as String;
+      var name2 = doc.get('name2')
+          as String; // Replace 'name' with the actual field name
+      if (name != name2) if (recipesMap.containsKey(name))
+        recipesMap[name]!.add(name2);
+      else
+        recipesMap[name] = [name2];
     });
   }
 
@@ -136,7 +134,6 @@ class _SearchFieldSampleState extends State<SearchFieldSample> {
                             _selected_recipe = x.item!;
                           });
                           _formKey.currentState!.validate();
-                          getRecipeRecommendationStream();
                           focus.unfocus();
                         },
                         scrollbarDecoration: ScrollbarDecoration(),
@@ -196,7 +193,7 @@ class _SearchFieldSampleState extends State<SearchFieldSample> {
                             )
                           : Recommendations(
                               selectedRecipe: _selected_recipe,
-                              suggestions: recipeRecommendations,
+                              suggestions: recipesMap[_selected_recipe],
                             ),
                     ),
                   ),
